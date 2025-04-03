@@ -108,6 +108,10 @@ body {
 .button:hover {
   transform: scale(.95); /* reduce un 5% HACERLO COMO DISABLE :DISABLE*/
 }
+.button:disabled {
+  background-image: none;
+  background-color: grey;
+}
 
 input[type="text"] {
   width: auto;
@@ -124,6 +128,26 @@ input[type="text"] {
 @media screen and (max-width: 768px) {
   input[type="text"] {
     font-size: 0.9375rem;
+  }
+  
+}
+
+.requirements{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 14px 20px 14px;
+  border-radius: 0.5rem;
+  background-color: #241442;
+  padding: 20px 20px 20px 20px;
+}
+
+.requirement-text{
+  font-size: 1.375rem;;
+}
+@media screen and (max-width: 768px) {
+  .requirement-text {
+    font-size: 1.0625rem;
   }
   
 }

@@ -23,54 +23,55 @@ const testNumbersElement = document.getElementById('testNumbers'); //NUMBERS
 const testSymbolsElement = document.getElementById('testSymbols'); //SYMBOLS
 
 //VARIABLES JS
-const passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
-let password = ''; //cada que termine de dar la vuelta al rango, aqui guardara la contraseña
-let characters = '';
+
+// let password = ''; //cada que termine de dar la vuelta al rango, aqui guardara la contraseña
+
 
 //FUNCIONES Y CALLBACKS
 const changeRange = () => {
   outputValueElement.textContent = rangeLenghtElement.value; // Que el TEXTO sea igual al VALOR del rango
-};
+ };
 
 //GENERAR PASSWPORD
 const generatePassword = () => {
+  const passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
+  const characters = checkTests(); // Obtiene los caracteres válidos desde checkTests
+  password = ''; // Reinicia la contraseña antes de generarla
+
   for (let i = 0; i < passwordLength; i++) {
-    //va a meter numeros dependiendo del nuemero del RANGO
+    // Va a meter números dependiendo del número del RANGO
     const randomIndex = Math.floor(Math.random() * characters.length);
-    password += characters.charAt(randomIndex); //mete al STRING la letra en ese INDICE
+    password += characters.charAt(randomIndex); // Mete al STRING la letra en ese INDICE
   }
 
-  passwordInputElement.value = password; // contraseña en el input
+  passwordInputElement.value = password; // Contraseña en el input
 };
 
 //CHECKS TOGGELS
 const checkTests = () => {
+  let characters = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
+  
   if (testUpperCaseElement.checked) {
-    characters += upperCase; //que meta al banco de caracteres
-  } else {
-    characters = ''; //esta mal
+    characters += upperCase; // Que meta al banco de caracteres
   }
-
   if (testLowerCaseElement.checked) {
     characters += lowerCase;
-  } else {
-    characters = '';
   }
   if (testNumbersElement.checked) {
     characters += numbers;
-  } else {
-    characters = '';
   }
   if (testSymbolsElement.checked) {
     characters += symbols;
-  } else {
-    characters = '';
   }
 
+  //DISABLE BUTTON
   if (characters === '') {
-    generateButtonElement.disabled;
+    generateButtonElement.disabled = true;
+  } else {
+    generateButtonElement.disabled = false;
   }
 
+  return characters; // Devuelve el valor de characters
   console.log(characters);
 };
 
