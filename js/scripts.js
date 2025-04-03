@@ -47,7 +47,7 @@ const generatePassword = () => {
   for (let i = 0; i < password.length; i++) { //revista la nueva contraseña en cada index
     if (upperCase.includes(password)) hasUpperCase = true;
   }
-//IMPRIME 4 DIGITOS DE MAS
+//IMPRIME 4 DIGITOS DE MáS
 //   if (!upperCase.includes(password)) {
 //     password= password.slice(0, password.length);
 //     password += upperCase.charAt(Math.floor(Math.random() * upperCase.length)); 
