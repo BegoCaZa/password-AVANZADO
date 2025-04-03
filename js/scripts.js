@@ -32,21 +32,20 @@ const changeRange = () => {
 
  //GENERAR PASSWPORD
 const generatePassword = () => {
-  let hasUpperCase = false; 
+   
  
   const passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
   const characters = checkTests(); // Obtiene los caracteres válidos desde checkTests
   password = ''; // Reinicia la contraseña antes de generarla
+  
 
   for (let i = 0; i < passwordLength; i++) {
     // Va a meter números dependiendo del número del RANGO
     const randomIndex = Math.floor(Math.random() * characters.length);
     password += characters.charAt(randomIndex); // Mete al STRING la letra en ese INDICE
-  }
 
-  for (let i = 0; i < password.length; i++) { //revista la nueva contraseña en cada index
-    if (upperCase.includes(password)) hasUpperCase = true;
   }
+  
 //IMPRIME 4 DIGITOS DE MáS
 //   if (!upperCase.includes(password)) {
 //     password= password.slice(0, password.length);
@@ -65,11 +64,9 @@ const generatePassword = () => {
 //     password += symbols.charAt(Math.floor(Math.random() * symbols.length)); 
 // }
 
-
-
 console.log (password); // para ver la contraseña en la consola
-console.log(hasUpperCase); // 
-  passwordInputElement.value = password; // contraseña en el input
+
+passwordInputElement.value = password; // contraseña en el input
 
 };
 
@@ -77,8 +74,9 @@ console.log(hasUpperCase); //
 const checkTests = () => {
   let characters = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
   
+  
   if (testUpperCaseElement.checked) {
-    characters += upperCase; // Que meta al banco de caracteres
+    characters += upperCase; // Que meta al banco de caracteres  
   } 
   if (testLowerCaseElement.checked) {
     characters += lowerCase;
@@ -87,9 +85,10 @@ const checkTests = () => {
     characters += numbers;
   }
   if (testSymbolsElement.checked) {
-    characters += symbols;
+    characters += symbols; 
   }
-
+  
+  
   //DISABLE BUTTON
   if (characters === '') {
     generateButtonElement.disabled = true;
@@ -97,9 +96,12 @@ const checkTests = () => {
     generateButtonElement.disabled = false;
   }
   // console.log(characters);
+  console.log(generateButtonElement.disabled); // para ver si el botón está desactivado o no
   return characters; // Devuelve el valor de characters
+
   
 };
+
 
 
 
