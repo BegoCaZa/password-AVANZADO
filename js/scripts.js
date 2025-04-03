@@ -22,9 +22,6 @@ const testLowerCaseElement = document.getElementById('testLowerCase'); //LOWERCA
 const testNumbersElement = document.getElementById('testNumbers'); //NUMBERS
 const testSymbolsElement = document.getElementById('testSymbols'); //SYMBOLS
 
-//VARIABLES JS
-
-// let password = ''; //cada que termine de dar la vuelta al rango, aqui guardara la contraseña
 
 
 //FUNCIONES Y CALLBACKS
@@ -32,8 +29,11 @@ const changeRange = () => {
   outputValueElement.textContent = rangeLenghtElement.value; // Que el TEXTO sea igual al VALOR del rango
  };
 
-//GENERAR PASSWPORD
+
+ //GENERAR PASSWPORD
 const generatePassword = () => {
+  let hasUpperCase = false; 
+ 
   const passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
   const characters = checkTests(); // Obtiene los caracteres válidos desde checkTests
   password = ''; // Reinicia la contraseña antes de generarla
@@ -44,7 +44,33 @@ const generatePassword = () => {
     password += characters.charAt(randomIndex); // Mete al STRING la letra en ese INDICE
   }
 
-  passwordInputElement.value = password; // Contraseña en el input
+  for (let i = 0; i < password.length; i++) { //revista la nueva contraseña en cada index
+    if (upperCase.includes(password)) hasUpperCase = true;
+  }
+//IMPRIME 4 DIGITOS DE MAS
+//   if (!upperCase.includes(password)) {
+//     password= password.slice(0, password.length);
+//     password += upperCase.charAt(Math.floor(Math.random() * upperCase.length)); 
+//   }
+//   if (!lowerCase.includes(password)) {
+//     password= password.slice(0, password.length);
+//     password += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length)); 
+//   }
+//   if (!numbers.includes(password)) {
+//     password= password.slice(0, password.length);
+//     password += numbers.charAt(Math.floor(Math.random() * numbers.length)); 
+//   }
+//   if (!symbols.includes(password)) {
+//     password= password.slice(0, password.length);
+//     password += symbols.charAt(Math.floor(Math.random() * symbols.length)); 
+// }
+
+
+
+console.log (password); // para ver la contraseña en la consola
+console.log(hasUpperCase); // 
+  passwordInputElement.value = password; // contraseña en el input
+
 };
 
 //CHECKS TOGGELS
@@ -53,7 +79,7 @@ const checkTests = () => {
   
   if (testUpperCaseElement.checked) {
     characters += upperCase; // Que meta al banco de caracteres
-  }
+  } 
   if (testLowerCaseElement.checked) {
     characters += lowerCase;
   }
@@ -70,10 +96,12 @@ const checkTests = () => {
   } else {
     generateButtonElement.disabled = false;
   }
-
+  // console.log(characters);
   return characters; // Devuelve el valor de characters
-  console.log(characters);
+  
 };
+
+
 
 //EVENTOS
 rangeLenghtElement.addEventListener('input', changeRange);
