@@ -3,10 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Document</title>
+    <title>Password Avanzado</title>
   </head>
   <body>
+    <div class="passwordGenerator">
+      <input type="text" id="password" placeholder="P4$5W0RD!" readonly"/>
+
+      <div class="lable-container">
+        <h2 class="subheader-lable">LENGHT:</h2>
+        <span class="range-value" id="output-value">16</span>
+      </div>
+
+      <div class="range-container">
+        <span class="range-value">4</span>
+        <input type="range" id="range-length" class="range-input" min="4" max="32" step="1" value="16" />
+        <span class="range-value">32</span>
+      </div>
+
+      <div class="includeUppercase">
+        <input type="checkbox" id="testUpperCase" class="input"/>
+        <label for="testUpperCase" class="label"></label>
+      </div>
+
+      <div class="includeLowercase">
+        <input type="checkbox" id="testLowerCase" class="input"/>
+        <label for="testLowerCase" class="label"></label>
+      </div>
+
+      <div class="includeNumbers">
+        <input type="checkbox" id="testNumbers" class="input"/>
+        <label for="testNumbers" class="label"></label>
+      </div>
+
+      <div class="includeSymbols">
+        <input type="checkbox" id="testSymbols" class="input"/>
+        <label for="testSymbols" class="label"></label>
+      </div>
+
+      <button id="generate-button" class="button" disabled >Generate Password</button> 
+
+
+
+    </div>
     <script src="./js/scripts.js"></script>
   </body>
 </html>
