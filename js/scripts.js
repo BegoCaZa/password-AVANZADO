@@ -46,6 +46,7 @@ const generatePassword = () => {
 
   }
   
+//a esta nueva contraseña le voy a quitar 4 caracteres, y agregar los obligatorios
 
 console.log (password); // para ver la contraseña en la consola
 passwordInputElement.value = password; // contraseña en el input
@@ -67,14 +68,14 @@ passwordInputElement.value = password; // contraseña en el input
 //     password += symbols.charAt(Math.floor(Math.random() * symbols.length)); 
 // }
 
-
 };
 
 //CHECKS TOGGELS
 const checkTests = () => {
   let characters = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
   
-  
+  //hacer una variable nueva de los caracteres oblicatorios
+
   if (testUpperCaseElement.checked) {
     characters += upperCase; // Que meta al banco de caracteres  
   } 
