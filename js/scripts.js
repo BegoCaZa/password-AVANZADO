@@ -33,7 +33,7 @@ const testSymbolsElement = document.getElementById('testSymbols'); //SYMBOLS
 // let passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
 let allowedCharacters = '';
 let password = '';
-let characters = '';
+// let characters = '';
 
 //FUNCIONES Y CALLBACKS
 
@@ -62,51 +62,54 @@ const checkPasswordLength = () => {
 
 //CHECKS TOGGELS
 const checkTests = () => {
-  let password = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
+  let password = ''; 
   let allowedCharacters = '';
 
   if (testUpperCaseElement.checked) {
     const randomIndex = Math.floor(Math.random() * upperCase.length);
     allowedCharacters += upperCase.charAt(randomIndex);
-    characters += upperCase;
+    password += upperCase;
   }
   if (testLowerCaseElement.checked) {
     const randomIndex = Math.floor(Math.random() * lowerCase.length);
     allowedCharacters += lowerCase.charAt(randomIndex);
-    characters += lowerCase;
+    password += lowerCase;
   }
   if (testNumbersElement.checked) {
     const randomIndex = Math.floor(Math.random() * numbers.length);
     allowedCharacters += numbers.charAt(randomIndex);
-    characters += numbers;
+    password += numbers;
   }
   if (testSymbolsElement.checked) {
     const randomIndex = Math.floor(Math.random() * symbols.length);
     allowedCharacters += symbols.charAt(randomIndex);
-    characters += symbols;
+    password += symbols;
   }
 
   //DISABLE BUTTON
-  if (characters === '') {
+  if (password === '') {
     generateButtonElement.disabled = true;
   } else {
     generateButtonElement.disabled = false;
   }
+
+  return allowedCharacters;
 };
 
 //GENERAR PASSWPORD
 const generatePassword = () => {
-  checkTests();
+  let allowedCharacters=checkTests();
   let passwordLength = checkPasswordLength(); // el mismo VALOR que el rango
+  let password = '';
 
-  for (let i = 0; i < rangeLenghtElement.value - passwordLength; i++) {
-    const randomIndex = Math.floor(Math.random() * password.length);
+  for (let i = 0; i < rangeLenghtElement.value-passwordLength; i++) {
+    const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
     password += allowedCharacters.charAt(randomIndex);
   }
 
   console.log(password); // para ver la contraseña en la consola
   passwordInputElement.value = password; // contraseña en el input
-  password = ''; // Reinicia la contraseña antes de generarla
+  // password = ''; 
 };
 
 //EVENTOS
