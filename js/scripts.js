@@ -21,90 +21,93 @@ const testUpperCaseElement = document.getElementById('testUpperCase'); //UPPERCA
 const testLowerCaseElement = document.getElementById('testLowerCase'); //LOWERCASE
 const testNumbersElement = document.getElementById('testNumbers'); //NUMBERS
 const testSymbolsElement = document.getElementById('testSymbols'); //SYMBOLS
-
-
-
-//FUNCIONES Y CALLBACKS
-const changeRange = () => {
-  outputValueElement.textContent = rangeLenghtElement.value; // Que el TEXTO sea igual al VALOR del rango
- };
-
-
- //GENERAR PASSWPORD
-const generatePassword = () => {
-   
- 
-  const passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
-  const characters = checkTests(); // Obtiene los caracteres válidos desde checkTests
-  password = ''; // Reinicia la contraseña antes de generarla
-  
-
-  for (let i = 0; i < passwordLength; i++) {
-    // Va a meter números dependiendo del número del RANGO
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    password += characters.charAt(randomIndex); // Mete al STRING la letra en ese INDICE
-
-  }
-  
-//a esta nueva contraseña le voy a quitar 4 caracteres, y agregar los obligatorios
-
-console.log (password); // para ver la contraseña en la consola
-passwordInputElement.value = password; // contraseña en el input
-//IMPRIME 4 DIGITOS DE MáS
-//   if (!upperCase.includes(password)) {
-//     password= password.slice(0, password.length);
-//     password += upperCase.charAt(Math.floor(Math.random() * upperCase.length)); 
-//   }
-//   if (!lowerCase.includes(password)) {
-//     password= password.slice(0, password.length);
-//     password += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length)); 
-//   }
-//   if (!numbers.includes(password)) {
-//     password= password.slice(0, password.length);
-//     password += numbers.charAt(Math.floor(Math.random() * numbers.length)); 
-//   }
-//   if (!symbols.includes(password)) {
-//     password= password.slice(0, password.length);
-//     password += symbols.charAt(Math.floor(Math.random() * symbols.length)); 
+// //OBJETOS
+// const charactersBank ={
+//   symbols:'!@#$%^&*()_+-={}[]:;<>,.?/</>',
+//   numbers:'1234567890',
+//   upperCase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+//   lowerCase: 'abcdefghijklmnopqrstuvwxyz'
 // }
 
+//VARIABLE JS
+// let passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
+let allowedCharacters = '';
+let password = '';
+let characters = '';
+
+//FUNCIONES Y CALLBACKS
+
+//VALOR DEL LENGHT
+const changeRange = () => {
+  outputValueElement.textContent = rangeLenghtElement.value; // Que el TEXTO sea igual al VALOR del rango
+};
+
+//checkpassword lenght
+const checkPasswordLength = () => {
+  let passwordLength = rangeLenghtElement.value; // el mismo VALOR que el rango
+  if (testUpperCaseElement.checked) {
+    passwordLength--;
+  }
+  if (testLowerCaseElement.checked) {
+    passwordLength--;
+  }
+  if (testNumbersElement.checked) {
+    passwordLength--;
+  }
+  if (testSymbolsElement.checked) {
+    passwordLength--;
+  }
+  return passwordLength;
 };
 
 //CHECKS TOGGELS
 const checkTests = () => {
-  let characters = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
-  
-  //hacer una variable nueva de los caracteres oblicatorios
+  let password = ''; //debe de estar dentro de la funcion para que la vaya reiniciando cada que hace check
+  let allowedCharacters = '';
 
   if (testUpperCaseElement.checked) {
-    characters += upperCase; // Que meta al banco de caracteres  
-  } 
+    const randomIndex = Math.floor(Math.random() * upperCase.length);
+    allowedCharacters += upperCase.charAt(randomIndex);
+    characters += upperCase;
+  }
   if (testLowerCaseElement.checked) {
+    const randomIndex = Math.floor(Math.random() * lowerCase.length);
+    allowedCharacters += lowerCase.charAt(randomIndex);
     characters += lowerCase;
   }
   if (testNumbersElement.checked) {
+    const randomIndex = Math.floor(Math.random() * numbers.length);
+    allowedCharacters += numbers.charAt(randomIndex);
     characters += numbers;
   }
   if (testSymbolsElement.checked) {
-    characters += symbols; 
+    const randomIndex = Math.floor(Math.random() * symbols.length);
+    allowedCharacters += symbols.charAt(randomIndex);
+    characters += symbols;
   }
-  
-  
+
   //DISABLE BUTTON
   if (characters === '') {
     generateButtonElement.disabled = true;
   } else {
     generateButtonElement.disabled = false;
   }
-  // console.log(characters);
-  console.log(generateButtonElement.disabled); // para ver si el botón está desactivado o no
-  return characters; // Devuelve el valor de characters
-
-  
 };
 
+//GENERAR PASSWPORD
+const generatePassword = () => {
+  checkTests();
+  let passwordLength = checkPasswordLength(); // el mismo VALOR que el rango
 
+  for (let i = 0; i < rangeLenghtElement.value - passwordLength; i++) {
+    const randomIndex = Math.floor(Math.random() * password.length);
+    password += allowedCharacters.charAt(randomIndex);
+  }
 
+  console.log(password); // para ver la contraseña en la consola
+  passwordInputElement.value = password; // contraseña en el input
+  password = ''; // Reinicia la contraseña antes de generarla
+};
 
 //EVENTOS
 rangeLenghtElement.addEventListener('input', changeRange);
