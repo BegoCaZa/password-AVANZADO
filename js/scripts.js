@@ -46,6 +46,9 @@ const generatePassword = () => {
 
   }
   
+
+console.log (password); // para ver la contraseña en la consola
+passwordInputElement.value = password; // contraseña en el input
 //IMPRIME 4 DIGITOS DE MáS
 //   if (!upperCase.includes(password)) {
 //     password= password.slice(0, password.length);
@@ -64,9 +67,6 @@ const generatePassword = () => {
 //     password += symbols.charAt(Math.floor(Math.random() * symbols.length)); 
 // }
 
-console.log (password); // para ver la contraseña en la consola
-
-passwordInputElement.value = password; // contraseña en el input
 
 };
 
