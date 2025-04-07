@@ -35,13 +35,14 @@ const charactersBank = {
 let allowedCharacters = '';
 let password = '';
 
-// let characters = '';
 
 //FUNCIONES Y CALLBACKS
 
 //VALOR DEL LENGHT
 const changeRange = () => {
   outputValueElement.textContent = rangeLenghtElement.value; // Que el TEXTO sea igual al VALOR del rango
+
+  return rangeLenghtElement.value;
 };
 
 //CHECKS TOGGELS
@@ -54,26 +55,7 @@ const checkTests = () => {
     password += charactersBank[input.id].charAt(randomIndex);
     allowedCharacters += charactersBank[input.id];
   });
-  // if (testUpperCaseElement.checked) {
-  //   const randomIndex = Math.floor(Math.random() * upperCase.length);
-  //   password += upperCase.charAt(randomIndex);
-  //   allowedCharacters += upperCase;
-  // }
-  // if (testLowerCaseElement.checked) {
-  //   const randomIndex = Math.floor(Math.random() * lowerCase.length);
-  //   password += lowerCase.charAt(randomIndex);
-  //   allowedCharacters += lowerCase;
-  // }
-  // if (testNumbersElement.checked) {
-  //   const randomIndex = Math.floor(Math.random() * numbers.length);
-  //   password += numbers.charAt(randomIndex);
-  //   allowedCharacters += numbers;
-  // }
-  // if (testSymbolsElement.checked) {
-  //   const randomIndex = Math.floor(Math.random() * symbols.length);
-  //   password += symbols.charAt(randomIndex);
-  //   allowedCharacters += symbols;
-  // }
+  
 
   console.log(password);
   console.log(allowedCharacters);
@@ -91,8 +73,9 @@ const checkTests = () => {
 //GENERAR PASSWPORD
 const generatePassword = () => {
   let allowedCharacters = checkTests();
+  
 
-  for (let i = 0; i < rangeLenghtElement.value - password.length; i++) {
+  for (let i = 0; i < changeRange() - password.length; i++) {
     const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
     password += allowedCharacters.charAt(randomIndex);
   }
